@@ -1,21 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import CSVReader from 'react-csv-reader'
+import React from "react"
+import CSVReader from "react-csv-reader"
 
-import NavApp from "./NavApp"
-import MyApp from "./MyApp"
-
-
-function MainApp() {
-    return (
-        <div>
-            <NavApp />
-            <MyApp />
-        </div>
-    )
-}
-
-class CSVParser extends React.Component {
+class App extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -52,6 +38,7 @@ class CSVParser extends React.Component {
                     onFileLoaded={this.handleFile}
                 />
                 <br/>
+                <p>Length: {this.state.sampleData[0].length}</p>
                 <table>
                     <thead>
                         <tr>{otsikot}</tr>
@@ -67,6 +54,4 @@ class CSVParser extends React.Component {
     
 }
 
-
-ReactDOM.render(<CSVParser />, document.getElementById('CSV-file-table'))
-ReactDOM.render(<MainApp />, document.getElementById('root'));
+export default App
