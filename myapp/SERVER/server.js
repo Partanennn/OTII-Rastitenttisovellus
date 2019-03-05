@@ -1,5 +1,5 @@
 var express = require('express')
-var mysql = require('mysql')
+var controller = require('./controller')
 var app = express();
 var port = 3001;
 
@@ -13,6 +13,12 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 app.use(allowCrossDomain)
+
+// REST API
+
+app.route("/allData")
+    .get(controller.fetchData)
+
 
 app.listen(port, () => {
     console.log("Server is listening port "+port)
