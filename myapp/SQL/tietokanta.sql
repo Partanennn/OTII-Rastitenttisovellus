@@ -13,12 +13,14 @@ ENGINE=InnoDB;
 CREATE TABLE db.data
 (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    student_name varChar(40) NOT NULL,
-    student_number INT NOT NULL,
-    student_email varChar(50),
-    course_number varChar(10),
-    course_name varChar(50),
-    room varChar(30),
-    tent_date date
+    huone varChar(10),
+    valvoja varChar(50),
+    luokka varChar(10),
+    opiskelija varChar(50),
+    kurssi varChar(50),
+    opettaja varChar(50),
+    tenttityyppi varChar(50),
+    tentin_lisatiedot varChar(50),
+    kampus varChar(50)
 )
 ENGINE=InnoDB;
