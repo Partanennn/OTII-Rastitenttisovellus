@@ -52,8 +52,8 @@ class CSVParser extends React.Component {
                     onFileLoaded={this.handleFile}
                 />
                 <br/>
-                <table>
-                    <thead>
+                <table className="table table-striped">
+                    <thead className="thead-dark">
                         <tr>{otsikot}</tr>
                     </thead>
                     <tbody>

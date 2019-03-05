@@ -1,17 +1,9 @@
 import React from "react"
 
 
-
-
 function MyApp() {
     return (
         <div className="container text-center text-md-left">
-            <div className="row mx-auto">
-                <div className="col-lg">
-                    <input type ="file" id="paskafilu"></input>
-                    <button type="button" className="btn btn-success">Import</button>
-                </div>
-            </div>
             <div className="row mx-auto">
                 <div className="col-lg">
                     <table>
