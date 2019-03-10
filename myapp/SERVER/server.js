@@ -19,6 +19,9 @@ app.use(allowCrossDomain)
 app.route("/allData")
     .get(controller.fetchData)
 
+app.route("/Teachers")
+    .get(controller.fetchTeachers)
+
 
 app.listen(port, () => {
     console.log("Server is listening port "+port)
