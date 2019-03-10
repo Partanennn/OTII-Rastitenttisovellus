@@ -37,7 +37,7 @@ class CSVParser extends React.Component {
         // Handles table classes, if table is empty then it doesnt have any classes and does show nothing in browser
         let luokat = "";
 
-        if(this.state.headers.length != 0)
+        if(this.state.headers.length !== 0)
             luokat = "table table-striped"
 
         const otsikot = this.state.headers.map((a, index) => {

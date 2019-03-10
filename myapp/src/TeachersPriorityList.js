@@ -9,12 +9,19 @@ class App extends React.Component {
     }
     
     componentDidMount() {
-
+        fetch("http://localhost:3001/Teachers")
+            .then(results => results.json())
+            .then(jsonData => {
+                this.setState({ data: jsonData })
+            })
     }
     
     render() {
 
-        
+        // Gets data from this.state.data, where all teachers from database should be
+        const rivit = this.state.data.map((a, index) => {
+            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td>{a["email"]}</td></tr>
+        })
 
         return(
             <div>
@@ -27,7 +34,7 @@ class App extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-
+                        {rivit}
                     </tbody>
                 </table>
             </div>
