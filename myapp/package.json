@@ -5,7 +5,7 @@
   "dependencies": {
     "@vtex/react-csv-parse": "^3.0.2",
     "papaparse": "^4.6.3",
-    "react": "^16.8.2",
+    "react": "^16.8.4",
     "react-csv-reader": "^1.2.2",
     "react-dom": "^16.8.2",
     "react-scripts": "2.1.5"
