@@ -25,8 +25,8 @@ class App extends React.Component {
 
         return(
             <div>
-                <table>
-                    <thead>
+                <table className="table table-striped">
+                    <thead className="thead-dark">
                         <tr>
                             <th>Prioriteetti</th>
                             <th>Nimi</th>
