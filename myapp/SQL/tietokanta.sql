@@ -27,3 +27,13 @@ CREATE TABLE db.data
     kampus varChar(50)
 )
 ENGINE=InnoDB;
+
+CREATE TABLE db.classroom
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nimi varChar(10),
+    koko int(3),
+    atk bool,
+    kampus varChar(50)
+)
+ENGINE=InnoDB;
