@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CSVReader from 'react-csv-reader'
 
-import MyApp from "./MyApp"
+import StudentDivider from "./StudentDivider"
 import TPL from "./TeachersPriorityList"
 
 function MainApp() {
     return (
         <div>
-            <MyApp />
+            <StudentDivider />
         </div>
     )
 }
