@@ -10,6 +10,7 @@ const CONN = mysql.createConnection({
 
 module.exports = 
 {
+    // Fetches all data about students
     fetchData: (req, res) => {
         CONN.query('SELECT * FROM data', (err, results, fields) => {
             if(err) {
@@ -22,6 +23,21 @@ module.exports =
         })
     },
 
+    // Fetches all students
+    fetchTeachers: (req, res) => {
+        CONN.query('SELECT * FROM teacher', (err, results, fields) => {
+            if(err) {
+                console.log("Virhe haettaessa dataa teacher-taulusta, syy: "+err)
+                res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage})
+            } else {
+                console.log("Tiedot haettu onnistuneesti teacher-taulusta!:)")
+                res.status(200).json(results)
+            }
+        })
+    },
+
+
+    // Adds data to data-table
     addData: (req, res) => {
         let v = req.body;
 

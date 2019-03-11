@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS db;
 CREATE DATABASE db;
 USE db;
 
+/* Priority data of teachers */
 CREATE TABLE db.teacher
 (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -11,6 +12,7 @@ CREATE TABLE db.teacher
 )
 ENGINE=InnoDB;
 
+/* All data about student who is coming for tent */
 CREATE TABLE db.data
 (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
