@@ -5,30 +5,26 @@ class StudentDivider extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: [],
-            headers: []
+            data: []
         }
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ 
-            data: nextProps.data, 
-            headers: nextProps.headers
+            data: nextProps.data
         })
     }
 
     render() {
 
-        const otsikot = <tr><th>Luokka</th><th>Oppilas</th></tr>
-
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{a[3]}</td><td>{a[4]}</td></tr>
+            return <tr key={index}><td>A-2069</td><td>Kekke Opettaja</td><td>{a[3]}</td><td>{a[4]}</td></tr>
         })
 
         return(
             <table className="table table-striped">
                         <thead className="thead-dark">
-                            {otsikot}
+                            <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
                         </thead>
                         <tbody>
                             {rivit}

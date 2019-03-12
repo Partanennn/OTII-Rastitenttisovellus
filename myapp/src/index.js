@@ -26,15 +26,8 @@ class App extends React.Component {
     }
 
     render() {
-        // Handles table classes, if table is empty then it doesnt have any classes and does show nothing in browser
-        let luokat = "";
-
-        if(this.state.headers.length !== 0)
-            luokat = "table table-striped"
-
-        const otsikot = this.state.headers.map((a, index) => {
-            return <th key={index}>{a}</th>
-        })
+        
+        const otsikot = <tr><th>Huone</th><th>Valvoja</th><th>Luokka</th><th>Opiskelija</th><th>Kurssi</th><th>Opettaja</th><th>Tenttityyppi</th><th>Tentin lisätiedot</th><th>Kampus</th></tr>
 
         var rivit = this.state.sampleData.map((a, index) => {
             return <tr key={index}><td>{a[0]}</td><td>{a[1]}</td><td>{a[2]}</td><td>{a[3]}</td><td>{a[4]}</td><td>{a[5]}</td><td>{a[6]}</td><td>{a[7]}</td><td>{a[8]}</td></tr>
@@ -50,9 +43,9 @@ class App extends React.Component {
                             onFileLoaded={this.handleFile}
                         />
                         <br/>
-                        <table className={luokat}>
+                        <table className="table table-striped">
                             <thead className="thead-dark">
-                                <tr>{otsikot}</tr>
+                                {otsikot}
                             </thead>
                             <tbody>
                                 {rivit}
