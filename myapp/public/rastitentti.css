@@ -15,3 +15,7 @@ body {
 .btn {
     margin-bottom: 1em;
 }
+
+.page-footer {
+    background-color: rgb(85,85,85);
+}
