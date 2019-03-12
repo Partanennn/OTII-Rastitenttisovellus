@@ -6,7 +6,12 @@ body {
     background-color: rgb(210, 37, 110)
 }
 
-.container {
+.container-fluid {
     margin-top: 1em;
+    width: 60%;
+    
+}
 
+.btn {
+    margin-bottom: 1em;
 }

@@ -35,7 +35,7 @@ class App extends React.Component {
         // <tr><td>{a[0]}</td><td>{a[1]}</td><td>{a[2]}</td><td>{a[3]}</td><td>{a[4]}</td><td>{a[5]}</td><td>{a[6]}</td><td>{a[7]}</td><td>{a[8]}</td></tr>
 
         return (
-        <div className="container text-center text-md-left">
+        <div className="container-fluid text-center text-md-left">
                 <div className="row mx-auto">
                     <div className="col-lg" id="CSV-file-table">
                         <CSVReader
@@ -56,6 +56,7 @@ class App extends React.Component {
                 </div>
                 <div className="row mx-auto">
                     <div className="col-lg" id="students-table">
+                        <button type="button" className="btn btn-success" id="StudentDividerButton">Divide students</button>
                         <StudentDivider data={this.state.sampleData} headers={this.state.headers}/>
                     </div>
                     <div className="col-lg">
