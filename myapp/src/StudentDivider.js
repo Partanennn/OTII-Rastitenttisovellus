@@ -5,7 +5,8 @@ class StudentDivider extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: []
+            data: [],
+            classrooms: []
         }
     }
 
@@ -15,22 +16,27 @@ class StudentDivider extends React.Component {
         })
     }
 
+
+
     render() {
 
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>A-2069</td><td>Kekke Opettaja</td><td>{a[3]}</td><td>{a[4]}</td></tr>
+            return <tr key={index}><td>A-2069</td><td>Sukunimi Etunimi</td><td>{a[3]}</td><td>{a[4]}</td></tr>
         })
 
         return(
-            <table className="table table-striped">
-                        <thead className="thead-dark">
-                            <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
-                        </thead>
-                        <tbody>
-                            {rivit}
-                        </tbody>
-                        
-                    </table>
+            <div>
+                <button type="button" className="btn btn-success" id="StudentDividerButton" >Divide students</button>
+                <table className="table table-striped">
+                    <thead className="thead-dark">
+                        <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
+                    </thead>
+                    <tbody>
+                        {rivit}
+                    </tbody>
+                    
+                </table>
+            </div>
         ) 
     }
 

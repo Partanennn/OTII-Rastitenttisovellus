@@ -56,7 +56,6 @@ class App extends React.Component {
                 </div>
                 <div className="row mx-auto">
                     <div className="col-lg" id="students-table">
-                        <button type="button" className="btn btn-success" id="StudentDividerButton">Divide students</button>
                         <StudentDivider data={this.state.sampleData} headers={this.state.headers}/>
                     </div>
                     <div className="col-lg">
