@@ -37,3 +37,11 @@ CREATE TABLE db.classroom
     kampus varChar(50)
 )
 ENGINE=InnoDB;
+
+CREATE TABLE db.courses 
+(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nimi varCHar(60),
+    atk boolean
+)
+ENGINE=InnoDB;

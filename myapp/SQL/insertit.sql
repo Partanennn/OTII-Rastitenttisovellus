@@ -11,3 +11,8 @@ INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-6969", 50, true, "Kuopi
 INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-2041", 30, true, "Kuopio" );
 INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("B-2002", 60, true, "Kuopio" );
 INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-2054", 100, false, "Kuopio" );
+
+/* Kurssi insertit */
+INSERT INTO courses(nimi, atk) VALUES("4 ECF4000 Tekniikan fysiikka", true);
+INSERT INTO courses(nimi, atk) VALUES("4 EKF4100 Konetekniikan fysiikka", true);
+INSERT INTO courses(nimi, atk) VALUES("4 ERXT810 Rakennusmateriaalioppi", false);

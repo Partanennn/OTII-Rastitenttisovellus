@@ -6,31 +6,51 @@ class StudentDivider extends React.Component {
         super(props)
         this.state = {
             data: [],
+            atkKurssit: [],
+            atkKurssilaiset: [],
             classrooms: [],
             rows: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ 
-            data: nextProps.data
-        })
-    }
-
     componentDidMount() {
         fetch("http://localhost:3001/classrooms")
             .then(results => results.json())
-            .then(data => {
-                this.setState({ classrooms: data })
+            .then(jsonData => {
+                this.setState({ classrooms: jsonData })
             })
-        //this.setState({ classrooms:  })
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        var joo = nextProps.data.map((a, index) => {
+            return this.state.atkKurssit.map((b, index) => {
+                if(a[4] == b.nimi) {
+                    return a;
+                }
+            })
+        })
+        console.log(joo)
+        this.setState({ 
+            data: nextProps.data
+        })
+        console.log(nextProps.data)
     }
 
     handleStudentDividerClick() {
-        var rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{this.state.classrooms[0].nimi}</td><td>Sukunimi Etunimi</td><td>{a[3]}</td><td>{a[4]}</td></tr>
+        // Counter is the variable that which classroom student is in
+        var counter = 0;
+        var opiskelijaLkm= 0;
+        var rivit = this.state.data.map((item, index) => {
+            opiskelijaLkm++;
+            if(opiskelijaLkm > this.state.classrooms[counter].koko) {
+                counter++
+                opiskelijaLkm = 1;
+            }
+            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
+        
         
         this.setState({rows: rivit})
     }
