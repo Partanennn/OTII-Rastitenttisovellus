@@ -6,29 +6,40 @@ class StudentDivider extends React.Component {
         super(props)
         this.state = {
             data: [],
+            atkKurssit: [],
+            atkKurssilaiset: [],
             classrooms: [],
             rows: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
     }
 
+    componentDidMount() {
+        fetch("http://localhost:3001/classrooms")
+            .then(results => results.json())
+            .then(jsonData => {
+                this.setState({ classrooms: jsonData })
+            })
+    }
+
     componentWillReceiveProps(nextProps) {
+
+        var joo = nextProps.data.map((a, index) => {
+            return this.state.atkKurssit.map((b, index) => {
+                if(a[4] == b.nimi) {
+                    return a;
+                }
+            })
+        })
+        console.log(joo)
         this.setState({ 
             data: nextProps.data
         })
         console.log(nextProps.data)
     }
 
-    componentDidMount() {
-        fetch("http://localhost:3001/classrooms")
-            .then(results => results.json())
-            .then(data => {
-                this.setState({ classrooms: data })
-            })
-        //this.setState({ classrooms:  })
-    }
-
     handleStudentDividerClick() {
+        // Counter is the variable that which classroom student is in
         var counter = 0;
         var opiskelijaLkm= 0;
         var rivit = this.state.data.map((item, index) => {

@@ -23,7 +23,7 @@ module.exports =
         })
     },
 
-    // Fetches all students
+    // Fetches all teachers
     fetchTeachers: (req, res) => {
         CONN.query('SELECT * FROM teacher', (err, results, fields) => {
             if(err) {
@@ -31,6 +31,19 @@ module.exports =
                 res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage})
             } else {
                 console.log("Tiedot haettu onnistuneesti teacher-taulusta!:)")
+                res.status(200).json(results)
+            }
+        })
+    },
+
+    // Fetches all courses from database
+    fetchCourses: (req, res) => {
+        CONN.query('SELECT * FROM courses', (err, results, fields) => {
+            if(err) {
+                console.log("Virhe haettaessa dataa courses-taulusta, syy: "+err)
+                res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage})
+            } else {
+                console.log("Tiedot haettu onnistuneesti ccourses-taulusta!:)")
                 res.status(200).json(results)
             }
         })
