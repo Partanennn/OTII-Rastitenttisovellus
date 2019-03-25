@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CSVReader from 'react-csv-reader'
+import Popup from 'reactjs-popup'
 
 import StudentDivider from "./StudentDivider"
 import TPL from "./TeachersPriorityList"
+
 
 class App extends React.Component {
     constructor() {
@@ -26,6 +28,8 @@ class App extends React.Component {
     }
 
     render() {
+
+        
         
         const otsikot = <tr><th>Huone</th><th>Valvoja</th><th>Luokka</th><th>Opiskelija</th><th>Kurssi</th><th>Opettaja</th><th>Tenttityyppi</th><th>Tentin lisätiedot</th><th>Kampus</th></tr>
 
@@ -65,6 +69,51 @@ class App extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Popup trigger={<button> Muokkaa</button>} position="left-center">
+                    <div>
+                        <div className="header">Muokkaa tietoja :==()</div>
+                        <form>
+                            <ul>
+                                <li>
+                                    <label>Huone : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Valvoja : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Luokka : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Opiskelija : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Kurssi : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Opettaja : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Tenttityyppi : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Tentin Lisätiedot : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                                <li>
+                                    <label>Kampus : </label>
+                                    <input type="text" name="Huone"></input>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </Popup>
             </div>
         )
     }
