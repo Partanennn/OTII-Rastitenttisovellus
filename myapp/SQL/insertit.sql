@@ -8,3 +8,6 @@ INSERT INTO teacher(name, priority, email) VALUES("Opettaja2", 3, "Opettaja2@sav
 
 /* Luokka insertit */
 INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-6969", 50, true, "Kuopio" );
+INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-2041", 30, true, "Kuopio" );
+INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("B-2002", 60, true, "Kuopio" );
+INSERT INTO classroom(nimi, koko, atk, kampus) VALUES("A-2054", 100, false, "Kuopio" );

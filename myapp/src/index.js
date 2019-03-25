@@ -56,7 +56,7 @@ class App extends React.Component {
                 </div>
                 <div className="row mx-auto">
                     <div className="col-lg" id="students-table">
-                        <StudentDivider data={this.state.sampleData} headers={this.state.headers}/>
+                        <StudentDivider data={this.state.sampleData.slice(0, this.state.sampleData.length-1)} headers={this.state.headers}/>
                     </div>
                     <div className="col-lg">
                         <button type="button" className="btn btn-success">Contact</button>

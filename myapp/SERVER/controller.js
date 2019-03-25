@@ -36,6 +36,19 @@ module.exports =
         })
     },
 
+    // Fetchers all classrooms
+    fetchClassrooms: (req, res) => {
+        CONN.query('SELECT * FROM classroom', (err, results, fields) => {
+            if(err) {
+                console.log("Virhe haettaessa dataa classroom-taulusta, syy: "+err)
+                res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage})
+            } else {
+                console.log("Tiedot haettu onnistuneesti classroom-taulusta!:)")
+                res.status(200).json(results)
+            }
+        })
+    },
+
 
     // Adds data to data-table
     addData: (req, res) => {

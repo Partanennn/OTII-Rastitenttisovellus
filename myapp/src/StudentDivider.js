@@ -6,8 +6,10 @@ class StudentDivider extends React.Component {
         super(props)
         this.state = {
             data: [],
-            classrooms: []
+            classrooms: [],
+            rows: []
         }
+        this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -16,23 +18,34 @@ class StudentDivider extends React.Component {
         })
     }
 
+    componentDidMount() {
+        fetch("http://localhost:3001/classrooms")
+            .then(results => results.json())
+            .then(data => {
+                this.setState({ classrooms: data })
+            })
+        //this.setState({ classrooms:  })
+    }
 
+    handleStudentDividerClick() {
+        var rivit = this.state.data.map((a, index) => {
+            return <tr key={index}><td>{this.state.classrooms[0].nimi}</td><td>Sukunimi Etunimi</td><td>{a[3]}</td><td>{a[4]}</td></tr>
+        })
+        
+        this.setState({rows: rivit})
+    }
 
     render() {
 
-        const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>A-2069</td><td>Sukunimi Etunimi</td><td>{a[3]}</td><td>{a[4]}</td></tr>
-        })
-
         return(
             <div>
-                <button type="button" className="btn btn-success" id="StudentDividerButton" >Divide students</button>
+                <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Divide students</button>
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
                     </thead>
                     <tbody>
-                        {rivit}
+                        {this.state.rows}
                     </tbody>
                     
                 </table>

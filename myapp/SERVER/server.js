@@ -22,6 +22,9 @@ app.route("/allData")
 app.route("/Teachers")
     .get(controller.fetchTeachers)
 
+app.route("/classrooms")
+    .get(controller.fetchClassrooms)
+
 
 app.listen(port, () => {
     console.log("Server is listening port "+port)
