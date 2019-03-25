@@ -43,7 +43,7 @@ module.exports =
                 console.log("Virhe haettaessa dataa courses-taulusta, syy: "+err)
                 res.status(500).json({'status': 'not ok', 'status_text': err.sqlMessage})
             } else {
-                console.log("Tiedot haettu onnistuneesti ccourses-taulusta!:)")
+                console.log("Tiedot haettu onnistuneesti courses-taulusta!:)")
                 res.status(200).json(results)
             }
         })

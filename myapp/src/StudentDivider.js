@@ -20,34 +20,48 @@ class StudentDivider extends React.Component {
             .then(jsonData => {
                 this.setState({ classrooms: jsonData })
             })
+
+        fetch("http://localhost:3001/courses")
+            .then(results => results.json())
+            .then(jsonData => {
+                this.setState({ atkKurssit: jsonData })
+            })
     }
 
     componentWillReceiveProps(nextProps) {
 
         var joo = nextProps.data.map((a, index) => {
-            return this.state.atkKurssit.map((b, index) => {
+            return (this.state.atkKurssit.map((b, index) => {
                 if(a[4] == b.nimi) {
                     return a;
                 }
-            })
+            }))
         })
-        console.log(joo)
+
+        // Prints out 3rd student 
+        // console.log(joo[2][0])
+
         this.setState({ 
-            data: nextProps.data
+            data: nextProps.data,
+            atkKurssilaiset: joo
         })
-        console.log(nextProps.data)
     }
 
     handleStudentDividerClick() {
+        console.log(this.state.atkKurssilaiset)
         // Counter is the variable that which classroom student is in
         var counter = 0;
-        var opiskelijaLkm= 0;
+        var opiskelijaLkm = 0;
+        var opiskelijaLkmATK = 0;
+        var atkCounter = 0;
+
         var rivit = this.state.data.map((item, index) => {
             opiskelijaLkm++;
             if(opiskelijaLkm > this.state.classrooms[counter].koko) {
                 counter++
                 opiskelijaLkm = 1;
             }
+
             return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
         
