@@ -16,6 +16,7 @@ class StudentDivider extends React.Component {
         this.setState({ 
             data: nextProps.data
         })
+        console.log(nextProps.data)
     }
 
     componentDidMount() {
@@ -28,9 +29,17 @@ class StudentDivider extends React.Component {
     }
 
     handleStudentDividerClick() {
-        var rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{this.state.classrooms[0].nimi}</td><td>Sukunimi Etunimi</td><td>{a[3]}</td><td>{a[4]}</td></tr>
+        var counter = 0;
+        var opiskelijaLkm= 0;
+        var rivit = this.state.data.map((item, index) => {
+            opiskelijaLkm++;
+            if(opiskelijaLkm > this.state.classrooms[counter].koko) {
+                counter++
+                opiskelijaLkm = 1;
+            }
+            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
+        
         
         this.setState({rows: rivit})
     }
