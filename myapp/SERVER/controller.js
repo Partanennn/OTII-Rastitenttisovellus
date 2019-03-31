@@ -62,6 +62,21 @@ module.exports =
         })
     },
 
+    // Adds teacher to table
+    addTeacher: (req, res) => {
+        let v = req.body;
+
+        CONN.query('INSERT INTO teacher (name, email) VALUES (?, ?)', [v.name, v.email], 
+            (error, results, fields) => {
+                if(error) {
+                    console.log("Virhe lisättäessä dataa tietokantaan, syy: "+error.mysql)
+                    res.json(error)
+                } else {
+                    console.log("Data lisätty onnistuneesti tietokantaan!:)")
+                    res.statusCode = 201;
+                }
+            }) 
+    },
 
     // Adds data to data-table
     addData: (req, res) => {

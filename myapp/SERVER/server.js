@@ -21,6 +21,7 @@ app.route("/allData")
 
 app.route("/Teachers")
     .get(controller.fetchTeachers)
+    .post(controller.addTeacher)
 
 app.route("/classrooms")
     .get(controller.fetchClassrooms)
