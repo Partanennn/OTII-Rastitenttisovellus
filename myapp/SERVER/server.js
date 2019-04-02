@@ -1,5 +1,6 @@
 var express = require('express')
 var controller = require('./controller')
+var bodyParser = require('body-parser')
 var app = express();
 var port = 3001;
 
@@ -11,8 +12,14 @@ var allowCrossDomain = function(req, res, next) {
 
     next();
 }
-
+app.use( bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(allowCrossDomain)
+
+app.use(express.json())
+
 
 // REST API
 
@@ -22,7 +29,7 @@ app.route("/allData")
 app.route("/Teachers")
     .get(controller.fetchTeachers)
     .post(controller.addTeacher)
-
+    
 app.route("/classrooms")
     .get(controller.fetchClassrooms)
 

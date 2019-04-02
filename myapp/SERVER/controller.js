@@ -65,11 +65,11 @@ module.exports =
     // Adds teacher to table
     addTeacher: (req, res) => {
         let v = req.body;
-
+        console.log(v)
         CONN.query('INSERT INTO teacher (name, email) VALUES (?, ?)', [v.name, v.email], 
             (error, results, fields) => {
                 if(error) {
-                    console.log("Virhe lisättäessä dataa tietokantaan, syy: "+error.mysql)
+                    console.log("Virhe lisättäessä dataa tietokantaan, syy: "+error)
                     res.json(error)
                 } else {
                     console.log("Data lisätty onnistuneesti tietokantaan!:)")

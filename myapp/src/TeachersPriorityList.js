@@ -15,17 +15,6 @@ class App extends React.Component {
                 this.setState({ data: jsonData })
             })
     }
-    
-    handleTeacherSelectorClick() {
-
-    }
-
-    handleTeacherContactClick() {
-        
-
-
-
-    }
 
     render() {
 
@@ -36,7 +25,14 @@ class App extends React.Component {
 
         return(
             <div>
-                <button type="button" onClick={this.handleTeacherSelectorClick} className="btn btn-success" id="TeacherSelectorBtn">Select teachers</button>
+                <button type="button" onClick={this.handleTeacherSelectorClick} className="btn btn-success" id="TeacherSelectorBtn">Valitse opettajat</button>
+                <button type="button" id="addTeacher" className="btn btn-success mx-3">Lisää opettaja</button>
+                <div id="teacherDialog">
+                    <form id="teacherAddForm">
+                        <input type="text" placeholder="Nimi" name="name"/>
+                        <input type="text" placeholder="Email" name="email"/>
+                    </form>
+                </div>
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr>
@@ -55,38 +51,4 @@ class App extends React.Component {
         )
     }
 }
-class Example extends React.Component {
-    constructor() {
-      super();
-      this.state = { user: {} };
-      this.onSubmit = this.handleSubmit.bind(this);
-    }
-    handleSubmit(e) {
-      e.preventDefault();
-      var self = this;
-      // On submit of the form, send a POST request with the data to the server.
-      fetch('/users', { 
-          method: 'POST',
-          data: {
-            name: self.refs.name,
-            job: self.refs.job
-          }
-        })
-        .then(function(response) {
-          return response.json()
-        }).then(function(body) {
-          console.log(body);
-        });
-    }
-    render() {
-      return (
-        <form onSubmit={this.onSubmit}>
-          <input type="text" placeholder="Name" ref="name"/>
-          <input type="text" placeholder="Job" ref="job"/>
-          <input type="submit" />
-        </form>
-      );
-    }
-  }
-export default Example
 export default App

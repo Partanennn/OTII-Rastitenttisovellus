@@ -7,7 +7,7 @@ CREATE TABLE db.teacher
 (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name varChar(50) NOT NULL,
-    priority TINYINT,
+    priority TINYINT DEFAULT 5,
     email varChar(50) NOT NULL
 )
 ENGINE=InnoDB;

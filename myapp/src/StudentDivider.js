@@ -12,6 +12,7 @@ class StudentDivider extends React.Component {
             rows: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
+        this.testHandle = this.testHandle.bind(this)
     }
 
     componentDidMount() {
@@ -48,7 +49,7 @@ class StudentDivider extends React.Component {
     }
 
     handleStudentDividerClick() {
-        console.log(this.state.atkKurssilaiset)
+        //console.log(this.state.atkKurssilaiset)
         // Counter is the variable that which classroom student is in
         var counter = 0;
         var opiskelijaLkm = 0;
@@ -69,11 +70,16 @@ class StudentDivider extends React.Component {
         this.setState({rows: rivit})
     }
 
+    testHandle() {
+        
+    }
+
     render() {
 
         return(
             <div>
-                <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Divide students</button>
+                <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Jaa oppilaat</button>
+                
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
