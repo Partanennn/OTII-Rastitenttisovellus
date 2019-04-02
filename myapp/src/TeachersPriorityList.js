@@ -5,6 +5,7 @@ class App extends React.Component {
         super()
         this.state = {
             data: []
+            
         }
     }
     
@@ -16,11 +17,21 @@ class App extends React.Component {
             })
     }
 
+
+    handleTeacherContactClick() {
+        this.eMail.select();
+        document.execCommand('copy');
+
+
+
+
+    }
+
     render() {
 
         // Gets data from this.state.data, where all teachers from database should be
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td>{a["email"]}</td><td><a id="teacherContact" href="" onClick={this.handleTeacherContactClick}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td></tr>
+            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="" onClick={this.handleTeacherContactClick}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td></tr>
         })
 
         return(
