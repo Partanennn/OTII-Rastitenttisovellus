@@ -7,6 +7,7 @@ class App extends React.Component {
             data: []
             
         }
+        this.handleMuokkaa = this.handleMuokkaa.bind(this)
     }
     
     componentDidMount() {
@@ -21,17 +22,21 @@ class App extends React.Component {
     handleTeacherContactClick() {
         this.eMail.select();
         document.execCommand('copy');
+    }
 
-
-
-
+    // Puts currently row information into sessionStorage so JQuery can access it
+    handleMuokkaa(a) {
+        sessionStorage["id"] = a["id"];
+        document.getElementById("teacherEditName").value = a["name"]
+        document.getElementById("teacherEditEmail").value = a["email"]
+        document.getElementById("teacherEditPriority").value = a["priority"]
     }
 
     render() {
 
         // Gets data from this.state.data, where all teachers from database should be
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="" onClick={this.handleTeacherContactClick}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td></tr>
+            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="" onClick={this.handleTeacherContactClick}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td><td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
         })
 
         return(
@@ -44,12 +49,20 @@ class App extends React.Component {
                         <input type="text" placeholder="Email" name="email"/>
                     </form>
                 </div>
+                <div id="teacherEditDialog">
+                    <form id="teacherEditForm">
+                        <input id="teacherEditPriority" type="text" name="priority"/>
+                        <input id="teacherEditName" type="text" name="name" />
+                        <input id="teacherEditEmail" type="text" name="email" />
+                    </form>
+                </div>
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr>
                             <th>Prioriteetti</th>
                             <th>Nimi</th>
                             <th>Sposti</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>

@@ -29,6 +29,9 @@ app.route("/allData")
 app.route("/Teachers")
     .get(controller.fetchTeachers)
     .post(controller.addTeacher)
+
+app.route("/Teachers/:id")
+    .put(controller.editTeacher)
     
 app.route("/classrooms")
     .get(controller.fetchClassrooms)
