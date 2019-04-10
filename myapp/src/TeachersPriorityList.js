@@ -19,9 +19,14 @@ class App extends React.Component {
     }
 
 
-    handleTeacherContactClick() {
-        this.eMail.select();
-        document.execCommand('copy');
+    handleTeacherContactClick(a) {
+        const el = document.createElement('textarea')
+        el.value = "Moro " + a.name + ", olet rästitentin valvontavuorossa. Pääsetkö paikalle?";
+        document.body.appendChild(el)
+        el.select()
+        document.execCommand('copy')
+        alert("Copied \n" + "'" +el.value +"'"+ "\n to clipboard")
+        document.body.removeChild(el)    
     }
 
     // Puts currently row information into sessionStorage so JQuery can access it
@@ -36,7 +41,7 @@ class App extends React.Component {
 
         // Gets data from this.state.data, where all teachers from database should be
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="" onClick={this.handleTeacherContactClick}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td><td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
+            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td><td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
         })
 
         return(
