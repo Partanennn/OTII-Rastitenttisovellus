@@ -29,6 +29,10 @@ class App extends React.Component {
         document.body.removeChild(el)    
     }
 
+    handlePrio(a) {
+        sessionStorage["id"] = a["id"];
+        sessionStorage["priority"] = a["priority"];
+    }
     // Puts currently row information into sessionStorage so JQuery can access it
     handleMuokkaa(a) {
         sessionStorage["id"] = a["id"];
@@ -41,7 +45,14 @@ class App extends React.Component {
 
         // Gets data from this.state.data, where all teachers from database should be
         const rivit = this.state.data.map((a, index) => {
-            return <tr key={index}><td>{a["priority"]}</td><td>{a["name"]}</td><td id="eMail">{a["email"]}</td><td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td><td><input type="checkbox" id="teacherCheckBox"></input></td><td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
+            return <tr key={index}>
+            <td>{a["priority"]}</td>
+            <td>{a["name"]}</td>
+            <td id="eMail">{a["email"]}</td>
+            <td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td>
+            <td><button type="button" className="teacherPrioUPBtn" onClick={() => {this.handlePrio(a)}}>/\</button></td>
+            <td><button type="button" className="teacherPrioDOWNBtn" onClick={() => {this.handlePrio(a)}}>\/</button></td>
+            <td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
         })
 
         return(

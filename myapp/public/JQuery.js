@@ -9,6 +9,22 @@ $(() => {
         $("#teacherEditDialog").dialog("open");
     })
 
+    $(".teacherPrioUPBtn").click(() => {
+        $.ajax({
+            url: "http://localhost:3001/Teachers/" + sessionStorage["id"],
+            method: 'put',
+            data: {
+                priority: sessionStorage["priority"] - 1
+            }
+        }).done((data, status, jqXHR) => {
+            if(jqXHR.status == 204) {
+                alert("Opettajan prioriteetti nostettu");
+            } else alert("Jotain meni pieleen");
+
+            location.reload()
+        })
+    })
+
     // Dialog to add new teacher
     $("#teacherDialog").dialog({
         autoOpen: false,
