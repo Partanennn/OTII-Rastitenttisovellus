@@ -11,7 +11,7 @@ $(() => {
 
     $(".teacherPrioUPBtn").click(() => {
         $.ajax({
-            url: "http://localhost:3001/Teachers/" + sessionStorage["id"],
+            url: "http://localhost:3001/TeacherPri/" + sessionStorage["id"],
             method: 'put',
             data: {
                 priority: sessionStorage["priority"] - 1
@@ -19,6 +19,22 @@ $(() => {
         }).done((data, status, jqXHR) => {
             if(jqXHR.status == 204) {
                 alert("Opettajan prioriteetti nostettu");
+            } else alert("Jotain meni pieleen");
+
+            location.reload()
+        })
+    })
+
+    $(".teacherPrioDOWNBtn").click(() => {
+        $.ajax({
+            url: "http://localhost:3001/TeacherPri/" + sessionStorage["id"],
+            method: 'put',
+            data: {
+                priority: sessionStorage["priority"] + 1
+            }
+        }).done((data, status, jqXHR) => {
+            if(jqXHR.status == 204) {
+                alert("Opettajan prioriteetti laskettu");
             } else alert("Jotain meni pieleen");
 
             location.reload()

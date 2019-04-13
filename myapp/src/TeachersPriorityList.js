@@ -34,6 +34,11 @@ class App extends React.Component {
         sessionStorage["id"] = a["id"];
         sessionStorage["priority"] = a["priority"];
     }
+
+    handlePrioDown(a) {
+        sessionStorage["id"] = a["id"];
+        sessionStorage["priority"] = a["priority"];
+    }
     // Puts currently row information into sessionStorage so JQuery can access it
     handleMuokkaa(a) {
         sessionStorage["id"] = a["id"];
@@ -52,7 +57,7 @@ class App extends React.Component {
             <td id="eMail">{a["email"]}</td>
             <td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td>
             <td><button type="button" className="teacherPrioUPBtn" onClick={() => {this.handlePrio(a)}}>/\</button></td>
-            <td><button type="button" className="teacherPrioDOWNBtn" onClick={() => {this.handlePrio(a)}}>\/</button></td>
+            <td><button type="button" className="teacherPrioDOWNBtn" onClick={() => {this.handlePrioDown(a)}}>\/</button></td>
             <td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
         })
 
@@ -79,6 +84,7 @@ class App extends React.Component {
                             <th>Prioriteetti</th>
                             <th>Nimi</th>
                             <th>Sposti</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
