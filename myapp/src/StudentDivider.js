@@ -10,7 +10,8 @@ class StudentDivider extends React.Component {
             atkKurssit: [],
             atkKurssilaiset: [],
             classrooms: [],
-            rows: []
+            rows: [],
+            teachers: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
         this.testHandle = this.testHandle.bind(this)
@@ -59,7 +60,8 @@ class StudentDivider extends React.Component {
         })
         this.setState({ 
             data: nextProps.data,
-            atkKurssilaiset: temp
+            atkKurssilaiset: temp,
+            teachers: nextProps.teachers
         })
     }
 
@@ -85,6 +87,7 @@ class StudentDivider extends React.Component {
             // 
             this.state.atkKurssit.map((kurssi) => {
                 if(item[4] == kurssi.nimi) {
+                    console.log(this.state.teachers.length)
                     return <tr key={index}><td>{kurssi.nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
                 }
             })

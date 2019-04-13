@@ -5,6 +5,7 @@ $(() => {
     })
 
     $(".teacherEditButton").click(() => {
+        console.log("Painettu")
         $("#teacherEditDialog").dialog("open");
     })
 

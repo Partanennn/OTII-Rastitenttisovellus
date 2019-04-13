@@ -46,7 +46,7 @@ class App extends React.Component {
 
         return(
             <div>
-                <button type="button" onClick={this.handleTeacherSelectorClick} className="btn btn-success" id="TeacherSelectorBtn">Valitse opettajat</button>
+                <button type="button" onClick={() => this.props.func(this.state.data)} className="btn btn-success" id="TeacherSelectorBtn">Valitse opettajat</button>
                 <button type="button" id="addTeacher" className="btn btn-success mx-3">Lisää opettaja</button>
                 <div id="teacherDialog">
                     <form id="teacherAddForm">
@@ -76,6 +76,7 @@ class App extends React.Component {
                         {rivit}
                     </tbody>
                 </table>
+                
             </div>
         )
     }

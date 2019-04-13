@@ -11,9 +11,11 @@ class App extends React.Component {
         super()
         this.state = {
             sampleData: [],
-            headers: []
+            headers: [],
+            teachers: []
         }
         this.handleFile = this.handleFile.bind(this)
+        this.handleTeacherSelect = this.handleTeacherSelect.bind(this)
     }
 
     // Handles data of csv and adds first row of csv file to this.state.headers, adds other rows to this.state.sampledata
@@ -24,6 +26,10 @@ class App extends React.Component {
             headers: data[0]
         });
         // console.log(actualData)
+    }
+
+    handleTeacherSelect(child) {
+        console.log(child)
     }
 
     render() {
@@ -59,11 +65,11 @@ class App extends React.Component {
                 </div>
                 <div className="row mx-auto">
                     <div className="col-lg" id="students-table">
-                        <StudentDivider data={this.state.sampleData.slice(0, this.state.sampleData.length-1)} headers={this.state.headers}/>
+                        <StudentDivider data={this.state.sampleData.slice(0, this.state.sampleData.length-1)} headers={this.state.headers} teachers={this.state.teachers}/>
                     </div>
                     <div className="col-lg">
                         <div id="teacherPriorityList">
-                            <TPL />
+                            <TPL func={this.handleTeacherSelect}/>
                         </div>
                     </div>
                 </div>
