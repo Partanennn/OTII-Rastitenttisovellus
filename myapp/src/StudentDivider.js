@@ -64,6 +64,7 @@ class StudentDivider extends React.Component {
             teachers: nextProps.teachers
         })
     }
+    
 
     handleStudentDividerClick() {
         //console.log(this.state.atkKurssilaiset)
@@ -72,11 +73,15 @@ class StudentDivider extends React.Component {
         var opiskelijaLkm = 0;
         var opiskelijaLkmATK = 0;
         var atkCounter = 0;
+        var teacherCounter = 0;
+        var classroomKoko = 0;
+        
         var rivit = this.state.data.map((item, index) => {
             opiskelijaLkm++;
             this.state.classrooms[counter].koko--;
             if(this.state.classrooms[counter].koko <= 0) {
                 counter++
+                teacherCounter++
             }
             
             // Jos tyypin kurssi on atk kurssi niin return atkkurssi 
@@ -84,15 +89,8 @@ class StudentDivider extends React.Component {
             //
             //EI TOIMI
             //
-            // 
-            this.state.atkKurssit.map((kurssi) => {
-                if(item[4] == kurssi.nimi) {
-                    console.log(this.state.teachers.length)
-                    return <tr key={index}><td>{kurssi.nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
-                }
-            })
-
-            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>Etunimi Sukunimi</td><td>{item[3]}</td><td>{item[4]}</td></tr>
+            //
+            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>{this.state.teachers.length != 0 ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
         
         //console.log(this.state.atkKurssilaiset)

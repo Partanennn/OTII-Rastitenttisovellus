@@ -29,7 +29,7 @@ class App extends React.Component {
     }
 
     handleTeacherSelect(child) {
-        console.log(child)
+        this.setState({ teachers: child })
     }
 
     render() {
