@@ -16,6 +16,7 @@ class App extends React.Component {
             .then(jsonData => {
                 this.setState({ data: jsonData })
             })
+            
     }
 
 

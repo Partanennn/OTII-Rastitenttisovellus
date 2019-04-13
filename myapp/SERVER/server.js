@@ -32,6 +32,9 @@ app.route("/Teachers")
 
 app.route("/Teachers/:id")
     .put(controller.editTeacher)
+
+app.route("/TeacherPri/:id")
+    .put(controller.changePriority)
     
 app.route("/classrooms")
     .get(controller.fetchClassrooms)

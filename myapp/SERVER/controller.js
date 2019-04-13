@@ -107,7 +107,22 @@ module.exports =
             })
     },
 
-
+    changePriority: (req ,res) => {
+        let v = req.body;
+        let key = req.params.id;
+        console.log(JSON.stringify(v))
+        CONN.query('UPDATE teacher SET priority=? WHERE id=?', [v.priority, key],
+            (err, results, fields) => {
+                if(err) {
+                    console.log(getDate() + "Virhe muutettaessa opettajan prioriteettia, syy: "+err)
+                    res.json(err)
+                } else {
+                    console.log(getDate() + "Onnistuneesti päivitetty opettajan prioriteettia::=)")
+                    res.statusCode = 204
+                    res.send();
+                }
+            })
+    },
     // Adds data to data-table
     addData: (req, res) => {
         let v = req.body;
