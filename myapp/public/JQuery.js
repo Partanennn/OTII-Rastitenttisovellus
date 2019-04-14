@@ -21,7 +21,6 @@ $(() => {
                 alert("Opettajan prioriteetti nostettu");
             } else alert("Jotain meni pieleen");
 
-            location.reload()
         })
     })
 
@@ -37,7 +36,6 @@ $(() => {
                 alert("Opettajan prioriteetti laskettu");
             } else alert("Jotain meni pieleen");
 
-            location.reload()
         })
     })
 

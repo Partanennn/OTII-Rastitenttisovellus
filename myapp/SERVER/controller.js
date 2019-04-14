@@ -110,7 +110,7 @@ module.exports =
     changePriority: (req ,res) => {
         let v = req.body;
         let key = req.params.id;
-        console.log(JSON.stringify(v))
+        console.log(JSON.stringify(v) + " ::::: id="+key)
         CONN.query('UPDATE teacher SET priority=? WHERE id=?', [v.priority, key],
             (err, results, fields) => {
                 if(err) {

@@ -16,7 +16,6 @@ class App extends React.Component {
             .then(jsonData => {
                 this.setState({ data: jsonData })
             })
-            
     }
 
 
@@ -33,11 +32,40 @@ class App extends React.Component {
     handlePrio(a) {
         sessionStorage["id"] = a["id"];
         sessionStorage["priority"] = a["priority"];
+        let temp = this.state.data
+        
+        this.state.data.map((item, index) => {
+            if(item.id === a["id"]) {
+                temp[index].priority--
+                this.setState({ data: temp })
+            }
+        })
     }
 
     handlePrioDown(a) {
         sessionStorage["id"] = a["id"];
         sessionStorage["priority"] = a["priority"];
+
+        
+
+        fetch('http://localhost:3001/TeacherPri/'+a["id"], { 
+            method: 'PUT',
+            body: JSON.stringify({priority: a["priority"]++})
+        })
+        .then(response => {
+            
+        })
+        .catch(err => console.error('Error: ' + err))
+        .then(res => console.log('Success: ' + res));
+
+        let temp = this.state.data
+        
+        this.state.data.map((item, index) => {
+            if(item.id === a["id"]) {
+                temp[index].priority++
+                this.setState({ data: temp })
+            }
+        })
     }
     // Puts currently row information into sessionStorage so JQuery can access it
     handleMuokkaa(a) {
@@ -73,7 +101,7 @@ class App extends React.Component {
                 </div>
                 <div id="teacherEditDialog">
                     <form id="teacherEditForm">
-                        <input id="teacherEditPriority" type="text" name="priority"/>
+                        <input id="teacherEditPriority" type="text" name="priority" />
                         <input id="teacherEditName" type="text" name="name" />
                         <input id="teacherEditEmail" type="text" name="email" />
                     </form>
