@@ -86,12 +86,9 @@ class StudentDivider extends React.Component {
             }
             
             // Jos tyypin kurssi on atk kurssi niin return atkkurssi 
-            //
-            //
-            //EI TOIMI
-            //
-            //
-            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>{this.state.teachers.length != 0 ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
+            //this.state.
+
+            return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>{this.state.teachers[counter] != null ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
         
         //console.log(this.state.atkKurssilaiset)
