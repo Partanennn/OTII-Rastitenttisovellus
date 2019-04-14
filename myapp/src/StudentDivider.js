@@ -74,14 +74,15 @@ class StudentDivider extends React.Component {
         var opiskelijaLkmATK = 0;
         var atkCounter = 0;
         var teacherCounter = 0;
-        var classroomKoko = 0;
-        
+        var classroomKoko = this.state.classrooms[0].koko;
+
         var rivit = this.state.data.map((item, index) => {
             opiskelijaLkm++;
-            this.state.classrooms[counter].koko--;
-            if(this.state.classrooms[counter].koko <= 0) {
+            classroomKoko--;
+            if(classroomKoko <= 0) {
                 counter++
                 teacherCounter++
+                classroomKoko = this.state.classrooms[counter].koko
             }
             
             // Jos tyypin kurssi on atk kurssi niin return atkkurssi 
