@@ -10,6 +10,7 @@ class App extends React.Component {
         }
         this.handleMuokkaaClick = this.handleMuokkaaClick.bind(this)
         this.handleMuokkaaSave = this.handleMuokkaaSave.bind(this)
+        this.handleLisaaSave = this.handleLisaaSave.bind(this)
     }
     
     componentDidMount() {
@@ -30,7 +31,7 @@ class App extends React.Component {
         document.body.removeChild(el)    
     }
 
-    handlePrio(a) {
+    handlePrioUp(a) {
         let prioriteetti = a["priority"]
         let id = a["id"];
 
@@ -79,32 +80,41 @@ class App extends React.Component {
         document.getElementById("teacherEditPriority").value = a["priority"]
     }
 
+    //Opettajan muokkauksen puttaaminen kantaan.
     handleMuokkaaSave() {
         axios.put("http://localhost:3001/Teachers/" + sessionStorage["id"], {
-        name: document.getElementById("teacherEditName").value, 
-        email: document.getElementById("teacherEditEmail").value, 
-        priority: document.getElementById("teacherEditPriority").value})
+            name: document.getElementById("teacherEditName").value, 
+            email: document.getElementById("teacherEditEmail").value, 
+            priority: document.getElementById("teacherEditPriority").value
+        })
         .then((res) => {
             if (res.status == 204) {
                 alert("Opettajan tiedot päivitetty onnistuneesti!")
                 document.location.reload()
+            }else {
+                alert("Opettajan tietojen lisääminen epäonnistui")
             }
         }) 
         
     }
 
+    //Uuden opettajan lisääminen kantaan.
     handleLisaaSave() {
         axios.post("http://localhost:3001/Teachers/", {
             name: document.getElementById("teacherAddName").value,
             email: document.getElementById("teacherAddEmail").value
-        }).then((res) => {
+        })
+        .then ((res) => {
             if (res.status == 201) {
                 alert("Opettaja lisätty onnistuneesti!")
                 document.location.reload()
-            }else alert("Jotain meni pieleen :(")
+            }else {
+                alert("Jotain meni pieleen :(")
+            }
         })
     }
 
+    //Opettajan poistaminen kannasta.
     handleDeleteTeacher(a) {
         if (window.confirm("Haluatko varmasti poistaa '" + a["name"] + "' taulusta?")) {
             axios.delete("http://localhost:3001/Teachers/" + a["id"])
@@ -127,7 +137,7 @@ class App extends React.Component {
             <td>{a["name"]}</td>
             <td id="eMail">{a["email"]}</td>
             <td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td>
-            <td><button type="button" className="btn btn-secondary" onClick={() => {this.handlePrio(a)}}>/\</button></td>
+            <td><button type="button" className="btn btn-secondary" onClick={() => {this.handlePrioUp(a)}}>/\</button></td>
             <td><button type="button" className="btn btn-secondary" onClick={() => {this.handlePrioDown(a)}}>\/</button></td>
             <td><button type="button" className="btn btn-success" data-toggle="modal" data-target="#editTeacherModal" onClick={() => { this.handleMuokkaaClick(a) } }>Muokkaa</button></td>
             <td><button type="button" className="btn btn-danger" onClick={() => { this.handleDeleteTeacher(a) } }>Poista</button></td></tr>
@@ -139,54 +149,53 @@ class App extends React.Component {
                 <button type="button" id="addTeacher" className="btn btn-success" data-toggle="modal" data-target="#addTeacherModal">Lisää opettaja</button> 
                 
                 <div className="modal fade" id="editTeacherModal" role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title">Muokkaa opettajan tietoja</h4>
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div className="modal-body">
-                        <form>
-                            <label>Nimi:</label>
-                            <input type="text" id="teacherEditName" className="form-control"></input>
-                            <label>Email:</label>
-                            <input type="text" id="teacherEditEmail" className="form-control"></input>
-                            <label>Prioriteetti:</label>
-                            <input type="text" id="teacherEditPriority" className="form-control"></input>
-                        </form>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-success" id="teacherEditSave" onClick={this.handleMuokkaaSave}>Tallenna</button>
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title">Muokkaa opettajan tietoja</h4>
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <label>Nimi:</label>
+                                    <input type="text" id="teacherEditName" className="form-control"></input>
+                                    <label>Email:</label>
+                                    <input type="text" id="teacherEditEmail" className="form-control"></input>
+                                    <label>Prioriteetti:</label>
+                                    <input type="text" id="teacherEditPriority" className="form-control"></input>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-success" id="teacherEditSave" onClick={this.handleMuokkaaSave}>Tallenna</button>
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>     
                     </div>
                 </div>
-                </div>
-                <table className="table table-striped">
 
                 <div className="modal fade" id="addTeacherModal" role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title">Lisää uusi opettaja</h4>
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div className="modal-body">
-                        <form>
-                            <label>Nimi:</label>
-                            <input type="text" id="teacherAddName" className="form-control"></input>
-                            <label>Email:</label>
-                            <input type="text" id="teacherAddEmail" className="form-control"></input>
-                        </form>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-success" id="teacherAddSave" onClick={this.handleLisaaSave}>Tallenna</button>
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title">Lisää uusi opettaja</h4>
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        <div className="modal-body">
+                            <form>
+                                <label>Nimi:</label>
+                                <input type="text" id="teacherAddName" className="form-control"></input>
+                                <label>Email:</label>
+                                <input type="text" id="teacherAddEmail" className="form-control"></input>
+                            </form>
+                        </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-success" id="teacherAddSave" onClick={this.handleLisaaSave}>Tallenna</button>
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-                <table className="table table-striped"></table>
+                <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr>
                             <th>Prioriteetti</th>

@@ -1,5 +1,6 @@
 import React from "react"
 import { timingSafeEqual } from "crypto";
+import axios from "axios";
 
 
 class StudentDivider extends React.Component {
@@ -18,12 +19,20 @@ class StudentDivider extends React.Component {
     }
 
     componentDidMount() {
+        
         fetch("http://localhost:3001/classrooms")
             .then(results => results.json())
             .then(jsonData => {
                 this.setState({ classrooms: jsonData })
+                console.log(jsonData)
             })
-
+        /*
+        axios.get('http://localhost:3001/classrooms')
+            .then( res => {
+                this.setState({classrooms: res.classrooms})
+                console.log(res.classrooms)
+            })
+            */
         fetch("http://localhost:3001/courses")
             .then(results => results.json())
             .then(jsonData => {
@@ -104,7 +113,8 @@ class StudentDivider extends React.Component {
         return(
             <div>
                 <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Jaa oppilaat</button>
-                
+                <button type="button" className="btn btn-success mx-1" id="StudentSaveBtn">Tallenna tentti</button>
+                <button type="button" className="btn btn-success" id="addClassRoomBtn">Hallitse luokkia</button>
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
