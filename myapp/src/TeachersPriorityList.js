@@ -8,7 +8,8 @@ class App extends React.Component {
             data: []
             
         }
-        this.handleMuokkaa = this.handleMuokkaa.bind(this)
+        this.handleMuokkaaClick = this.handleMuokkaaClick.bind(this)
+        this.handleMuokkaaSave = this.handleMuokkaaSave.bind(this)
     }
     
     componentDidMount() {
@@ -71,11 +72,25 @@ class App extends React.Component {
         })
     }
     // Puts currently row information into sessionStorage so JQuery can access it
-    handleMuokkaa(a) {
+    handleMuokkaaClick(a) {
         sessionStorage["id"] = a["id"];
         document.getElementById("teacherEditName").value = a["name"]
         document.getElementById("teacherEditEmail").value = a["email"]
         document.getElementById("teacherEditPriority").value = a["priority"]
+    }
+
+    handleMuokkaaSave() {
+        axios.put("http://localhost:3001/Teachers/" + sessionStorage["id"], {
+        name: document.getElementById("teacherEditName").value, 
+        email: document.getElementById("teacherEditEmail").value, 
+        priority: document.getElementById("teacherEditPriority").value})
+        .then((res) => {
+            if (res.status == 204) {
+                alert("Opettajan tiedot päivitetty onnistuneesti!")
+                document.location.reload()
+            }
+        }) 
+        
     }
 
     render() {
@@ -89,25 +104,42 @@ class App extends React.Component {
             <td><a id="teacherContact" href="#" onClick={() => {this.handleTeacherContactClick(a)}}>Copy to clipboard</a></td>
             <td><button type="button" className="teacherPrioUPBtn" onClick={() => {this.handlePrio(a)}}>/\</button></td>
             <td><button type="button" className="teacherPrioDOWNBtn" onClick={() => {this.handlePrioDown(a)}}>\/</button></td>
-            <td><button type="button" a={index} className="teacherEditButton" onClick={() => { this.handleMuokkaa(a) } }>Muokkaa</button></td></tr>
+            <td><button type="button" className="btn btn-success" data-toggle="modal" data-target="#myModal" onClick={() => { this.handleMuokkaaClick(a) } }>Muokkaa</button></td></tr>
         })
 
         return(
             <div>
                 <button type="button" onClick={() => this.props.func(this.state.data)} className="btn btn-success" id="TeacherSelectorBtn">Valitse opettajat</button>
                 <button type="button" id="addTeacher" className="btn btn-success mx-3">Lisää opettaja</button>
-                <div id="teacherDialog">
-                    <form id="teacherAddForm">
-                        <input type="text" placeholder="Nimi" name="name"/>
-                        <input type="text" placeholder="Email" name="email"/>
-                    </form>
+                <button type="button" className="btn btn-success" data-toggle="modal" data-target="#myModal">Muokkaa</button>
+
+                
+                <div className="modal fade" id="myModal" role="dialog">
+                <div className="modal-dialog">
+                
+                
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h4 className="modal-title">Muokkaa opettajan tietoja</h4>
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div className="modal-body">
+                        <form>
+                            <label>Nimi:</label>
+                            <input type="text" id="teacherEditName" className="form-control"></input>
+                            <label>Email:</label>
+                            <input type="text" id="teacherEditEmail" className="form-control"></input>
+                            <label>Prioriteetti:</label>
+                            <input type="text" id="teacherEditPriority" className="form-control"></input>
+                        </form>
+                        <button type="button" className="btn btn-success my-2" id="teacherEditSave" onClick={this.handleMuokkaaSave}>Tallenna</button>
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                    
                 </div>
-                <div id="teacherEditDialog">
-                    <form id="teacherEditForm">
-                        <input id="teacherEditPriority" type="text" name="priority" />
-                        <input id="teacherEditName" type="text" name="name" />
-                        <input id="teacherEditEmail" type="text" name="email" />
-                    </form>
                 </div>
                 <table className="table table-striped">
                     <thead className="thead-dark">
