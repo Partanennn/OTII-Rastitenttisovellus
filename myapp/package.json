@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@vtex/react-csv-parse": "^3.0.2",
+    "axios": "^0.18.0",
     "papaparse": "^4.6.3",
     "react": "^16.8.4",
     "react-csv-reader": "^1.2.2",

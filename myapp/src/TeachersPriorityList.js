@@ -1,4 +1,5 @@
 import React from "react"
+import axios from 'axios'
 
 class App extends React.Component {
     constructor() {
@@ -11,10 +12,9 @@ class App extends React.Component {
     }
     
     componentDidMount() {
-        fetch("http://localhost:3001/Teachers")
-            .then(results => results.json())
-            .then(jsonData => {
-                this.setState({ data: jsonData })
+        axios.get('http://localhost:3001/Teachers')
+            .then(res => {
+                this.setState({ data: res.data })
             })
     }
 
@@ -30,11 +30,13 @@ class App extends React.Component {
     }
 
     handlePrio(a) {
-        sessionStorage["id"] = a["id"];
-        sessionStorage["priority"] = a["priority"];
+        let prioriteetti = a["priority"]
+        let id = a["id"];
+
+        axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti})
+
         let temp = this.state.data
-        
-        this.state.data.map((item, index) => {
+        this.state.data.forEach((item, index) => {
             if(item.id === a["id"]) {
                 temp[index].priority--
                 this.setState({ data: temp })
@@ -43,24 +45,15 @@ class App extends React.Component {
     }
 
     handlePrioDown(a) {
-        sessionStorage["id"] = a["id"];
-        sessionStorage["priority"] = a["priority"];
-
         
+        let prioriteetti = a["priority"]
+        let id = a["id"];
 
-        fetch('http://localhost:3001/TeacherPri/'+a["id"], { 
-            method: 'PUT',
-            body: JSON.stringify({priority: a["priority"]++})
-        })
-        .then(response => {
-            
-        })
-        .catch(err => console.error('Error: ' + err))
-        .then(res => console.log('Success: ' + res));
+        axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti+1})
 
         let temp = this.state.data
         
-        this.state.data.map((item, index) => {
+        this.state.data.forEach((item, index) => {
             if(item.id === a["id"]) {
                 temp[index].priority++
                 this.setState({ data: temp })
