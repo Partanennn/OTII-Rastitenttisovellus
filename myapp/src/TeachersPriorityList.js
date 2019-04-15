@@ -132,9 +132,10 @@ class App extends React.Component {
                             <label>Prioriteetti:</label>
                             <input type="text" id="teacherEditPriority" className="form-control"></input>
                         </form>
-                        <button type="button" className="btn btn-success my-2" id="teacherEditSave" onClick={this.handleMuokkaaSave}>Tallenna</button>
+                        
                     </div>
                     <div className="modal-footer">
+                        <button type="button" className="btn btn-success" id="teacherEditSave" onClick={this.handleMuokkaaSave}>Tallenna</button>
                         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                     </div>
