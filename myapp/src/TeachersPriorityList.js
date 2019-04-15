@@ -33,15 +33,17 @@ class App extends React.Component {
         let prioriteetti = a["priority"]
         let id = a["id"];
 
-        axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti})
+        
 
         let temp = this.state.data
         this.state.data.forEach((item, index) => {
             if(item.id === a["id"]) {
                 temp[index].priority--
+                let temp2 = temp[index].priority
                 if (temp[index].priority < 1) {
                     temp[index].priority = 1
                 }
+                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2+1})
                 this.setState({ data: temp })
             }
         })
@@ -52,25 +54,18 @@ class App extends React.Component {
         let prioriteetti = a["priority"]
         let id = a["id"];
 
-<<<<<<< HEAD
         axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti+1})
-=======
-        fetch('http://localhost:3001/TeacherPri/'+a["id"], { 
-            method: 'PUT',
-            body: JSON.stringify({priority: a["priority"]+1})
-        })
-        .then(response => {
-            
-        })
-        .catch(err => console.error('Error: ' + err))
-        .then(res => console.log('Success: ' + res));
->>>>>>> fd87d1599556228ce14a8a0ea0f8bb022e2caa12
 
         let temp = this.state.data
         
         this.state.data.forEach((item, index) => {
             if(item.id === a["id"]) {
                 temp[index].priority++
+                let temp2 = temp[index].priority
+                if (temp[index].priority > 10) {
+                    temp[index].priority = 10
+                }
+                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2-1})
                 this.setState({ data: temp })
             }
         })
