@@ -50,11 +50,8 @@ class App extends React.Component {
     handlePrioDown(a) {
         
         let prioriteetti = a["priority"]
-        let id = a["id"];
+        let id = a["id"]
 
-<<<<<<< HEAD
-        axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti+1})
-=======
         fetch('http://localhost:3001/TeacherPri/'+a["id"], { 
             method: 'PUT',
             body: JSON.stringify({priority: a["priority"]+1})
@@ -64,7 +61,6 @@ class App extends React.Component {
         })
         .catch(err => console.error('Error: ' + err))
         .then(res => console.log('Success: ' + res));
->>>>>>> fd87d1599556228ce14a8a0ea0f8bb022e2caa12
 
         let temp = this.state.data
         
