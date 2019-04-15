@@ -32,6 +32,7 @@ app.route("/Teachers")
 
 app.route("/Teachers/:id")
     .put(controller.editTeacher)
+    .delete(controller.deleteTeacher)
 
 app.route("/TeacherPri/:id")
     .put(controller.changePriority)

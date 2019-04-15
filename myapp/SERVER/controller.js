@@ -89,6 +89,22 @@ module.exports =
             }) 
     },
 
+    // Delete teacher
+    deleteTeacher: (req, res) => {
+        let key = req.params.id;
+        CONN.query('DELETE FROM teacher WHERE id=?', [key], 
+            (err, result, fields) => {
+                if(err) {
+                    console.log(getDate() + "Virhe muutettaessa opettaja taulun dataa, syy: "+err);
+                    res.status(500).json({ error: 'something is wrong' });
+                } else {
+                    console.log(getDate() + "Onnistuneesti poistettu opettaja teacher pöydässä::)");
+                    res.statusCode = 200;
+                    res.send();
+                }
+            })
+    },
+
     // Edit teacher
     editTeacher: (req, res) => {
         let v = req.body;
