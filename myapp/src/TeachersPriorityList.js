@@ -106,7 +106,7 @@ class App extends React.Component {
     }
 
     handleDeleteTeacher(a) {
-        if (confirm("Haluatko varmasti poistaa "+a["nimi"]+ " taulusta?")) {
+        if (window.confirm("Haluatko varmasti poistaa '" + a["name"] + "' taulusta?")) {
             axios.delete("http://localhost:3001/Teachers/" + a["id"])
             .then  ((res) => {
                 if(res.status == 200) {
@@ -130,7 +130,7 @@ class App extends React.Component {
             <td><button type="button" className="btn btn-secondary" onClick={() => {this.handlePrio(a)}}>/\</button></td>
             <td><button type="button" className="btn btn-secondary" onClick={() => {this.handlePrioDown(a)}}>\/</button></td>
             <td><button type="button" className="btn btn-success" data-toggle="modal" data-target="#editTeacherModal" onClick={() => { this.handleMuokkaaClick(a) } }>Muokkaa</button></td>
-            <td><button type="button" className="btn btn-warning" onClick={() => { this.handleDeleteTeacher(a) } }>Poista</button></td></tr>
+            <td><button type="button" className="btn btn-danger" onClick={() => { this.handleDeleteTeacher(a) } }>Poista</button></td></tr>
         })
 
         return(
@@ -192,6 +192,7 @@ class App extends React.Component {
                             <th>Prioriteetti</th>
                             <th>Nimi</th>
                             <th>Sposti</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
