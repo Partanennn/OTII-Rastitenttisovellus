@@ -37,6 +37,9 @@ class App extends React.Component {
         this.state.data.map((item, index) => {
             if(item.id === a["id"]) {
                 temp[index].priority--
+                if (temp[index].priority < 1) {
+                    temp[index].priority = 1
+                }
                 this.setState({ data: temp })
             }
         })
@@ -50,7 +53,7 @@ class App extends React.Component {
 
         fetch('http://localhost:3001/TeacherPri/'+a["id"], { 
             method: 'PUT',
-            body: JSON.stringify({priority: a["priority"]++})
+            body: JSON.stringify({priority: a["priority"]+1})
         })
         .then(response => {
             
