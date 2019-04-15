@@ -42,8 +42,9 @@ class App extends React.Component {
                 let temp2 = temp[index].priority
                 if (temp[index].priority < 1) {
                     temp[index].priority = 1
+                    temp2 = 1
                 }
-                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2+1})
+                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2})
                 this.setState({ data: temp })
             }
         })
@@ -54,8 +55,6 @@ class App extends React.Component {
         let prioriteetti = a["priority"]
         let id = a["id"];
 
-        axios.put("http://localhost:3001/TeacherPri/"+id, {priority: prioriteetti+1})
-
         let temp = this.state.data
         
         this.state.data.forEach((item, index) => {
@@ -64,8 +63,9 @@ class App extends React.Component {
                 let temp2 = temp[index].priority
                 if (temp[index].priority > 10) {
                     temp[index].priority = 10
+                    temp2 = 10
                 }
-                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2-1})
+                axios.put("http://localhost:3001/TeacherPri/"+id, {priority: temp2})
                 this.setState({ data: temp })
             }
         })
