@@ -16,6 +16,7 @@ ENGINE=InnoDB;
 CREATE TABLE db.data
 (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    
     huone varChar(10),
     valvoja varChar(50),
     luokka varChar(10),
