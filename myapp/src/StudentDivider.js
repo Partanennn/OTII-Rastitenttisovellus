@@ -128,9 +128,7 @@ class StudentDivider extends React.Component {
     }
 
     handleTenttiSave() {
-        axios.post("http://localhost:3001/Exam/", {
-            
-        })
+        foreach()
     }
 
     render() {
