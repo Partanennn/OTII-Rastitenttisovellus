@@ -122,11 +122,11 @@ class App extends React.Component {
                 if(res.status == 200) {
                     alert("Opettaja poistettu onnistuneesti kannasta")
                     document.location.reload()
+                } else {
+                    alert("Opettajan poistaminen epäonnistui")
                 }
         })
-        } else {
-
-        }
+        } 
     }
     render() {
 
