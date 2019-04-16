@@ -43,7 +43,8 @@ app.route("/classrooms")
 app.route("/courses")
     .get(controller.fetchCourses)
 
-app.get("/Exam/")
+app.get("/Exam/:id")
+    .post(controller.addExam)
 
 app.listen(port, () => {
     console.log("Server is listening port "+port)

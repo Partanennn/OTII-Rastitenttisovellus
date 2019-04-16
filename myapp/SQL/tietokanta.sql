@@ -49,5 +49,11 @@ ENGINE=InnoDB;
 
 CREATE TABLE db.exam
 (
-    
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tila VARCHAR(20),
+    valvoja VARCHAR(50),
+    opiskelija VARCHAR(50),
+    kurssi VARCHAR(100),
+    pvm DATE
 )
+ENGINE=InnoDB;
