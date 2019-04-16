@@ -89,6 +89,21 @@ module.exports =
             }) 
     },
 
+    addExam: (req, res) => {
+        let v = req.body
+        console.log(v)
+        CONN.query('INSERT INTO data (huone, valvoja, luokka, opiskelija, kurssi, opettaja, tenttityyppi, tentin_lisatiedot, kampus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [v.huone, v.valvoja, v.luokka, v.opiskelija, v.kurssi, v.opettaja, v.tenttityyppi, v.tentin_lisatiedot, v.kampus], 
+            (error, results, fields) => {
+                if(error) {
+                    console.log(getDate() + "Virhe lisättäessä dataa tietokantaan, syy: "+error)
+                    res.json(error)
+                } else {
+                    console.log(getDate() + "Data lisätty onnistuneesti tietokantaan!:)")
+                    res.statusCode = 201;
+                }
+            }) 
+    },
+
     // Delete teacher
     deleteTeacher: (req, res) => {
         let key = req.params.id;

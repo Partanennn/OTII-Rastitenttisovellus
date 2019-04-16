@@ -46,3 +46,8 @@ CREATE TABLE db.courses
     atk boolean
 )
 ENGINE=InnoDB;
+
+CREATE TABLE db.exam
+(
+    
+)

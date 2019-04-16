@@ -16,7 +16,6 @@ class StudentDivider extends React.Component {
             teachers: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
-        this.testHandle = this.testHandle.bind(this)
     }
 
     componentDidMount() {
@@ -112,7 +111,7 @@ class StudentDivider extends React.Component {
             
             return <tr key={index}><td>{this.state.atkClassrooms[atkCounter].nimi}</td><td>{this.state.teachers[counter] != null ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })  
-
+        teacherCounter++
         // Jakaa ei atk luokkaa tarvitsevat oppilaat ei atk luokkiin
         var rivit = opiskelijat.map((item, index) => {
             opiskelijaLkm++;
@@ -128,10 +127,6 @@ class StudentDivider extends React.Component {
 
         //console.log(this.state.atkKurssilaiset)
         this.setState({rows: rivit, rows2: rivit2})
-    }
-
-    testHandle() {
-        
     }
 
     render() {
