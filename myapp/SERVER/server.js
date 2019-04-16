@@ -43,7 +43,7 @@ app.route("/classrooms")
 app.route("/courses")
     .get(controller.fetchCourses)
 
-app.get("/Exam/:id")
+app.route("/Exam")
     .post(controller.addExam)
 
 app.listen(port, () => {
