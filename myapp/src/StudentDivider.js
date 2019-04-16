@@ -1,5 +1,4 @@
 import React from "react"
-import { timingSafeEqual } from "crypto";
 import axios from "axios";
 
 
@@ -9,9 +8,11 @@ class StudentDivider extends React.Component {
         this.state = {
             data: [],
             atkKurssit: [],
-            atkKurssilaiset: [],
+            data2: [],
             classrooms: [],
+            atkClassrooms: [],
             rows: [],
+            rows2: [],
             teachers: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
@@ -23,16 +24,27 @@ class StudentDivider extends React.Component {
         fetch("http://localhost:3001/classrooms")
             .then(results => results.json())
             .then(jsonData => {
-                this.setState({ classrooms: jsonData })
-                console.log(jsonData)
+                var atkLuokat = []
+                
+                // Lisää atk luokat atkLuokat tauluun
+                for(var i = 0; i < jsonData.length; i++) {
+                    if(jsonData[i].atk) {
+                        atkLuokat.push(jsonData[i])
+                    }
+                }
+
+                // Poistaa atk luokat jsonDatasta
+                for(var i = 0; i < jsonData.length; i++) {
+                    if(jsonData[i].atk) {
+                        jsonData.splice(i, 1)
+                        i--
+                    }
+                }
+                
+                this.setState({ classrooms: jsonData, atkClassrooms: atkLuokat })
+                //console.log(jsonData)
             })
-        /*
-        axios.get('http://localhost:3001/classrooms')
-            .then( res => {
-                this.setState({classrooms: res.classrooms})
-                console.log(res.classrooms)
-            })
-            */
+        
         fetch("http://localhost:3001/courses")
             .then(results => results.json())
             .then(jsonData => {
@@ -49,27 +61,9 @@ class StudentDivider extends React.Component {
 
     componentWillReceiveProps(nextProps) {
 
-        /*var joo = nextProps.data.map((a, index) => {
-            return (this.state.atkKurssit.map((b, index) => {
-                if(a[4] == b.nimi) {
-                    return a;
-                }
-            }))
-        })
-        */
-        // Prints out 3rd student 
-        // console.log(joo[2][0])
-        var temp = []
-        nextProps.data.map((item, index) => {
-            for(var i = 0; i < this.state.atkKurssit.length; i++) {
-                if(item[4] == this.state.atkKurssit[i]["nimi"]) {
-                    temp.push(item)
-                }
-            }
-        })
         this.setState({ 
             data: nextProps.data,
-            atkKurssilaiset: temp,
+            data2: nextProps.data,
             teachers: nextProps.teachers
         })
     }
@@ -83,25 +77,57 @@ class StudentDivider extends React.Component {
         var opiskelijaLkmATK = 0;
         var atkCounter = 0;
         var teacherCounter = 0;
+        var atkClassroomKoko = this.state.atkClassrooms[0].koko
         var classroomKoko = this.state.classrooms[0].koko;
-
-        var rivit = this.state.data.map((item, index) => {
+        var opiskelijat = []
+        
+        var atkNortit = []
+        // Jakaa oppilaat atkkurssilaisiin ja ei atkkurssilaisiin
+        this.state.data.forEach((item, index) => {
+            let on = false
+            this.state.atkKurssit.forEach((kurssi) => {
+                let counter = 0
+                if(item[4] == kurssi.nimi) {
+                    atkNortit.push(item)
+                    on = true
+                }
+            })
+            if(!on)
+                opiskelijat.push(item)
+        })
+        //console.log(atkNörtit)
+        //console.log(opiskelijat)
+        console.log(this.state.atkClassrooms)
+        console.log(this.state.classrooms)
+        // Jakaa atk opiskelijat atk luokkiin
+        var rivit2 = atkNortit.map((item, index) => {
             opiskelijaLkm++;
-            classroomKoko--;
+            //console.log(this.state.atkClassrooms)
+            if(atkClassroomKoko <= 0) {
+                atkCounter++
+                teacherCounter++
+                atkClassroomKoko = this.state.atkClassrooms[atkCounter].koko
+            }
+            atkClassroomKoko--;
+            
+            return <tr key={index}><td>{this.state.atkClassrooms[atkCounter].nimi}</td><td>{this.state.teachers[counter] != null ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
+        })  
+
+        // Jakaa ei atk luokkaa tarvitsevat oppilaat ei atk luokkiin
+        var rivit = opiskelijat.map((item, index) => {
+            opiskelijaLkm++;
             if(classroomKoko <= 0) {
                 counter++
                 teacherCounter++
                 classroomKoko = this.state.classrooms[counter].koko
             }
-            
-            // Jos tyypin kurssi on atk kurssi niin return atkkurssi 
-            
+            classroomKoko--;
 
             return <tr key={index}><td>{this.state.classrooms[counter].nimi}</td><td>{this.state.teachers[counter] != null ? this.state.teachers[teacherCounter].name : "Ei opettajaa"}</td><td>{item[3]}</td><td>{item[4]}</td></tr>
         })
-        
+
         //console.log(this.state.atkKurssilaiset)
-        this.setState({rows: rivit})
+        this.setState({rows: rivit, rows2: rivit2})
     }
 
     testHandle() {
@@ -121,6 +147,7 @@ class StudentDivider extends React.Component {
                     </thead>
                     <tbody>
                         {this.state.rows}
+                        {this.state.rows2}
                     </tbody>
                     
                 </table>

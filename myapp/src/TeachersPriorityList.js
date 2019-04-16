@@ -88,7 +88,7 @@ class App extends React.Component {
             priority: document.getElementById("teacherEditPriority").value
         })
         .then((res) => {
-            if (res.status == 204) {
+            if (res.status === 204) {
                 alert("Opettajan tiedot päivitetty onnistuneesti!")
                 document.location.reload()
             }else {
@@ -105,7 +105,7 @@ class App extends React.Component {
             email: document.getElementById("teacherAddEmail").value
         })
         .then ((res) => {
-            if (res.status == 201) {
+            if (res.status === 201) {
                 alert("Opettaja lisätty onnistuneesti!")
                 document.location.reload()
             }else {
@@ -119,7 +119,7 @@ class App extends React.Component {
         if (window.confirm("Haluatko varmasti poistaa '" + a["name"] + "' taulusta?")) {
             axios.delete("http://localhost:3001/Teachers/" + a["id"])
             .then  ((res) => {
-                if(res.status == 200) {
+                if(res.status === 200) {
                     alert("Opettaja poistettu onnistuneesti kannasta")
                     document.location.reload()
                 }
