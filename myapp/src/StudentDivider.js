@@ -96,8 +96,6 @@ class StudentDivider extends React.Component {
         })
         //console.log(atkNörtit)
         //console.log(opiskelijat)
-        console.log(this.state.atkClassrooms)
-        console.log(this.state.classrooms)
         // Jakaa atk opiskelijat atk luokkiin
         var rivit2 = atkNortit.map((item, index) => {
             opiskelijaLkm++;

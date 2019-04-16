@@ -92,13 +92,13 @@ module.exports =
     addExam: (req, res) => {
         let v = req.body
         console.log(v)
-        CONN.query('INSERT INTO data (huone, valvoja, luokka, opiskelija, kurssi, opettaja, tenttityyppi, tentin_lisatiedot, kampus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [v.huone, v.valvoja, v.luokka, v.opiskelija, v.kurssi, v.opettaja, v.tenttityyppi, v.tentin_lisatiedot, v.kampus], 
+        CONN.query('INSERT INTO exam (tila, valvoja, opiskelija, kurssi, date) VALUES (?, ?, ?, ?, ?)', [v.tila, v.valvoja, v.opiskelija, v.kurssi, v.date], 
             (error, results, fields) => {
                 if(error) {
-                    console.log(getDate() + "Virhe lisättäessä dataa tietokantaan, syy: "+error)
+                    console.log(getDate() + "Virhe lisättäessä tenttiä tietokantaan, syy: "+error)
                     res.json(error)
                 } else {
-                    console.log(getDate() + "Data lisätty onnistuneesti tietokantaan!:)")
+                    console.log(getDate() + "Tentti lisätty onnistuneesti tietokantaan!:)")
                     res.statusCode = 201;
                 }
             }) 
