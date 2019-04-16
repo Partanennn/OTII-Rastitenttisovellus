@@ -129,13 +129,42 @@ class StudentDivider extends React.Component {
         this.setState({rows: rivit, rows2: rivit2})
     }
 
+    handleTenttiSave() {
+        axios.post("http://localhost:3001/Exam/", {
+            
+        })
+    }
+
     render() {
 
         return(
             <div>
                 <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Jaa oppilaat</button>
-                <button type="button" className="btn btn-success mx-1" id="StudentSaveBtn">Tallenna tentti</button>
+                <button type="button" className="btn btn-success mx-1" id="StudentSaveBtn" data-toggle="modal" data-target="#saveExamModal">Tallenna tentti</button>
                 <button type="button" className="btn btn-success" id="addClassRoomBtn">Hallitse luokkia</button>
+                
+                <div className="modal fade" id="saveExamModal" role="dialog">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h4 className="modal-title">Lisää uusi opettaja</h4>
+                                <button type="button" className="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        <div className="modal-body">
+                            <form>
+                                <label>Nimi:</label>
+                                <input type="text" id="teacherAddName" className="form-control"></input>
+                                <label>Email:</label>
+                                <input type="text" id="teacherAddEmail" className="form-control"></input>
+                            </form>
+                        </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-success" id="examSave" onClick={this.handleTenttiSave}>Tallenna</button>
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
