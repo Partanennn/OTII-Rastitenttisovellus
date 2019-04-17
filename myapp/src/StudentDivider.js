@@ -155,7 +155,7 @@ class StudentDivider extends React.Component {
                                 <label>Nimi:</label>
                                 <input type="text" id="classroomAddNimi" className="form-control"></input>
                                 <label>koko:</label>
-                                <input type="text" id="classroomAddkoko" className="form-control" onKeyPress={() => this.validate()}></input>
+                                <input type="text" id="classroomAddkoko" className="form-control" ></input>
                                 <label>Valitse jos atk:</label>
                                 <input type="checkbox" id="classroomAddAtk12" className="form-control"></input>
                             </form>
