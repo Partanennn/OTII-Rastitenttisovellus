@@ -16,7 +16,7 @@ class StudentDivider extends React.Component {
             teachers: []
         }
         this.handleStudentDividerClick = this.handleStudentDividerClick.bind(this)
-        this.handleClassroomAdd = this.handleClassroomAdd.bind(this)
+        
     }
 
     componentDidMount() {
@@ -128,45 +128,15 @@ class StudentDivider extends React.Component {
         this.setState({rows: rivit, rows2: rivit2})
     }
 
-    handleClassroomAdd() {
-        var nimi = document.getElementById("classroomAddNimi").value
-        var koko = document.getElementById("classroomAddkoko").value
-        var atk = document.getElementById("classroomAddAtk12").value
-        console.log(atk)
-    }
 
     render() {
 
         return(
             <div>
                 <button type="button" onClick={this.handleStudentDividerClick} className="btn btn-success" id="StudentDividerButton">Jaa oppilaat</button>
-                <button type="button" className="btn btn-success mx-1" id="StudentSaveBtn" data-toggle="modal" data-target="#saveExamModal">Tallenna tentti</button>
-                <button type="button" className="btn btn-success" id="addClassRoomBtn" data-toggle="modal" data-target="#editClassroomModal">Hallitse luokkia</button>
                 
-                <div className="modal fade" id="editClassroomModal" role="dialog">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4 className="modal-title">Lisää luokka</h4>
-                                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                            </div>
-                        <div className="modal-body">
-                            <form>
-                                <label>Nimi:</label>
-                                <input type="text" id="classroomAddNimi" className="form-control"></input>
-                                <label>koko:</label>
-                                <input type="text" id="classroomAddkoko" className="form-control" ></input>
-                                <label>Valitse jos atk:</label>
-                                <input type="checkbox" id="classroomAddAtk12" className="form-control"></input>
-                            </form>
-                        </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-success" id="examSave" onClick={this.handleClassroomAdd}>Tallenna</button>
-                                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+            
                 <table className="table table-striped">
                     <thead className="thead-dark">
                         <tr><th>Tila</th><th>Valvoja</th><th>Opiskelija</th><th>Kurssi</th></tr>
